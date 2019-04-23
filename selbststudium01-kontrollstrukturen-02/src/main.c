@@ -12,6 +12,8 @@
  * @brief Lab implementation
  */
 #include <stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
 
 /**
  * @brief Main entry point.
@@ -23,7 +25,36 @@
  * @returns Returns EXIT_SUCCESS (=0) on success,
  *                  EXIT_FAILURE (=1) if more than one argument is given.
  */
+
+/*
+ASCII: 
+- 9: TAB
+- 10: New Line
+- 32 : Space
+*/
 int main(int argc, char* argv[])
 {
+    char c = getchar();
+
+    int charCounter = 0, wordCounter = 0;
+    bool wasChar = false;
+
+    while (c != 10) {
+        charCounter++;
+        if (c != 32 && c != 9) {
+            wasChar = true;
+        } else if (wasChar) {
+            wordCounter++;
+            wasChar = false;
+        }
+
+        c = getchar();
+    }
+
+    if (wasChar) {
+        wordCounter++;
+    }
+
+    printf("words: %d, characters: %d\n", wordCounter, charCounter);
     return EXIT_SUCCESS;
 }
