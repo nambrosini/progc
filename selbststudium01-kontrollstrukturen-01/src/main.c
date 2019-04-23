@@ -25,5 +25,13 @@
  */
 int main(int argc, char* argv[])
 {
+    printf("F'heit   Celsius\n");
+    printf("----------------\n");
+
+    for (int i = -100; i <= 200; i += 20) {
+        double c = (5 * (i - 32)) / 9.0;
+        printf("%6d   %7.2f\n", i, c);
+    }
+
     return EXIT_SUCCESS;
 }
