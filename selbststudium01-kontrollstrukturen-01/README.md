@@ -10,19 +10,19 @@ F'heit    Celsius
 -----------------
  -100      -73.33
   -80      -62.22
- .
- .
- .
- 160        71.11
- 180        82.22
- 200        93.33
+    .
+    .
+    .
+  160       71.11
+  180       82.22
+  200       93.33
 ```
 
 ## Hinweise
 * Die Formel für die Umrechnung von Fahrenheit (f) in Celsius (c) Werte lautet:
 
 ```
-c = (5 ⋅ (f − 32)) / 9
+c = (5 * (f − 32)) / 9
 ```
 
 * Für die Aufgabe brauchen Sie eine Schleife und die `printf`-Funktion. Siehe die verschiedenen Praktika Aufgaben wo `printf` verwendet und teilweise erklärt wird.
