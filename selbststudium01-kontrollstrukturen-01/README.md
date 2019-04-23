@@ -6,16 +6,16 @@ in einer sauber formatierten Tabelle analog zum folgenden Beispiel erscheinen (C
 zwei Stellen gerundet, vier Leerzeichen zwischen F‘heit und Celsius):
 
 ```
-F'heit Celsius
+F'heit    Celsius
 -----------------
- -100 -73.33
- -80 -62.22
+ -100      -73.33
+  -80      -62.22
  .
  .
  .
- 160 71.11
- 180 82.22
- 200 93.33
+ 160        71.11
+ 180        82.22
+ 200        93.33
 ```
 
 ## Hinweise
