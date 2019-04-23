@@ -21,6 +21,8 @@ F'heit Celsius
 ## Hinweise
 * Die Formel für die Umrechnung von Fahrenheit (f) in Celsius (c) Werte lautet:
 
-![Picture 1](imgs/picture_1.png)
+```
+c = (5 ⋅ (f − 32)) / 9
+```
 
 * Für die Aufgabe brauchen Sie eine Schleife und die `printf`-Funktion. Siehe die verschiedenen Praktika Aufgaben wo `printf` verwendet und teilweise erklärt wird.
