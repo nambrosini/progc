@@ -53,22 +53,21 @@ static void test_getStatistics(void)
     };
     unsigned int num_students = sizeof(student_points)/sizeof(*student_points);
 
-// change here:
 
-//    statistics_t statistics = getStatistics(student_points, num_students, 100);
-//    
-//    CU_ASSERT_EQUAL(statistics./*tbd*/, 1);
-//    CU_ASSERT_EQUAL(statistics./*tbd*/, 2);
-//    CU_ASSERT_EQUAL(statistics./*tbd*/, 3);
-//    CU_ASSERT_EQUAL(statistics./*tbd*/, 4);
-//    CU_ASSERT_EQUAL(statistics./*tbd*/, 5);
-//    CU_ASSERT_EQUAL(statistics./*tbd*/, 6);
-//    CU_ASSERT_EQUAL(statistics./*tbd*/, 6);
-//    CU_ASSERT_EQUAL(statistics./*tbd*/, 1);
-//    CU_ASSERT_EQUAL(statistics./*tbd*/, 91.0 / 21);
-//    CU_ASSERT_EQUAL(statistics./*tbd*/, 6 + 5 + 4);
-//    CU_ASSERT_EQUAL(statistics./*tbd*/, (6 + 5 + 4) / (double)num_students);
-    CU_ASSERT_TRUE(0);
+
+    statistics_t statistics = getStatistics(student_points, num_students, 100);
+
+    CU_ASSERT_EQUAL(statistics.mark1, 1);
+    CU_ASSERT_EQUAL(statistics.mark2, 2);
+    CU_ASSERT_EQUAL(statistics.mark3, 3);
+    CU_ASSERT_EQUAL(statistics.mark4, 4);
+    CU_ASSERT_EQUAL(statistics.mark5, 5);
+    CU_ASSERT_EQUAL(statistics.mark6, 6);
+    CU_ASSERT_EQUAL(statistics.bestMark, 6);
+    CU_ASSERT_EQUAL(statistics.worstMark, 1);
+    CU_ASSERT_EQUAL(statistics.averageMark, 91.0 / (float) num_students);
+    CU_ASSERT_EQUAL(statistics.greaterThan4, 6 + 5 + 4);
+    CU_ASSERT_EQUAL(statistics.greaterThan4Percent, (6 + 5 + 4) / (float) num_students * 100);
 }
 
 int main(void)

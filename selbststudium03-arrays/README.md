@@ -29,8 +29,7 @@ gefragt und das Programm gibt die neue Notenstatistik aus.
 ## Hinweise
 - Geben Sie die erreichten Punkte der Studenten einzeln ein, so dass das Programm
 immer eine Punktzahl einliest und dann nach der nächsten fragt. Nehmen Sie an, dass
-Punkte immer ganzzahlig und ≥ 0 sind. Die Eingabe einer Punktzahl “ –1“ soll die Eingabe der Punkte komplettieren; alle anderen negativen Punktzahlen sollen in einer
-Fehlermeldung resultieren.
+Punkte immer ganzzahlig und ≥ 0 sind. Die Eingabe einer Punktzahl “ –1“ soll die Eingabe der Punkte komplettieren; alle anderen negativen Punktzahlen sollen in einer Fehlermeldung resultieren.
 - Noten seien ebenfalls ganzzahlig; 6 ist die beste und 1 die schlechteste Note. Ist p6
 die Anzahl Punkte, die für eine 6 nötig sind und p die Anzahl Punkte, die ein Student
 erreicht hat, dann wird seine Note n wie folgt berechnet.
