@@ -20,7 +20,7 @@ statistics_t getStatistics(unsigned int student_points[],
                             unsigned int p6) {
     statistics_t statistics;
     
-    statistics.averageMark = 0;
+    statistics.averageMark = 0.0;
     statistics.worstMark = 0;
     statistics.bestMark = 0;
     statistics.mark1 = 0;
@@ -29,6 +29,7 @@ statistics_t getStatistics(unsigned int student_points[],
     statistics.mark4 = 0;
     statistics.mark5 = 0;
     statistics.mark6 = 0;
+    statistics.greaterThan4 = 0;
 
     for (int i = 0; i < num_students; i++) {
         int note = getMark(student_points[i], p6);
@@ -72,8 +73,8 @@ statistics_t getStatistics(unsigned int student_points[],
         }
     }
 
-    statistics.averageMark /= (float) num_students;
-    statistics.greaterThan4Percent = floor(statistics.greaterThan4 / (float) num_students * 100);
+    statistics.averageMark /= (double) num_students;
+    statistics.greaterThan4Percent = statistics.greaterThan4 / (double) num_students * 100;
     
     return statistics;
 }

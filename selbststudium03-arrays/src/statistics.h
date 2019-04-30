@@ -10,9 +10,9 @@ typedef struct {
     int mark1;
     int bestMark;
     int worstMark;
-    float averageMark;
+    double averageMark;
     int greaterThan4;
-    float greaterThan4Percent;
+    double greaterThan4Percent;
 } statistics_t;
 
 unsigned int getMark(unsigned int p, unsigned int p6);

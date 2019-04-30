@@ -65,9 +65,9 @@ static void test_getStatistics(void)
     CU_ASSERT_EQUAL(statistics.mark6, 6);
     CU_ASSERT_EQUAL(statistics.bestMark, 6);
     CU_ASSERT_EQUAL(statistics.worstMark, 1);
-    CU_ASSERT_EQUAL(statistics.averageMark, 91.0 / (float) num_students);
+    CU_ASSERT_EQUAL(statistics.averageMark, 91.0 / (double) num_students);
     CU_ASSERT_EQUAL(statistics.greaterThan4, 6 + 5 + 4);
-    CU_ASSERT_EQUAL(statistics.greaterThan4Percent, (6 + 5 + 4) / (float) num_students * 100);
+    CU_ASSERT_EQUAL(statistics.greaterThan4Percent, (6 + 5 + 4) / (double) num_students * 100);
 }
 
 int main(void)
