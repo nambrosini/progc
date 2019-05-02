@@ -53,3 +53,6 @@ dkms.conf
 */**/bin/
 include/
 tests/
+
+.vscode
+*/**/.vscode
