@@ -67,7 +67,7 @@ static void test_in_order(void)
     int exit_code = system(XSTR(TARGET) " 1>" OUTFILE " 2>" ERRFILE " <" INFILE_IN_ORDER);
     // assert
     CU_ASSERT_EQUAL(exit_code, 0);
-    assert_lines(OUTFILE, out_txt, sizeof(out_txt)/sizeof(*out_txt));
+    assert_lines(OUTFILE, out_txt, sizeof(out_txt) / sizeof(*out_txt));
 }
 
 static void test_out_of_order(void)

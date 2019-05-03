@@ -3,35 +3,55 @@
 #include <string.h>
 #include <stdbool.h>
 
-static int compare (const void * a, const void * b) {
-    return strcmp (*(const char **) a, *(const char **) b);
-}
-
-
 int main(int argc, char* argv[])
 {
     // read and sort
-    char input[20];
-    char wordlist[100][20];
+    char word[20];
+    char * wordlist[100];
+
     int counter = 0;
     while (true)
     {
-        scanf("%s", input);
+        scanf("%s", word);
 
-        if (strcmp(input, "ZZZ") == 0) {
+        if (strcmp(word, "ZZZ") == 0) {
             break;
         }
 
-        strcpy(wordlist[counter], input);
-        counter++;
-    } ;
+        size_t n = strlen(word);
+        char *entry = malloc(n + 1);
+        strcpy(entry, word);
 
-    int n_array = sizeof(wordlist) / sizeof(char*);
+        bool contains = false;
 
-    int i;
-    qsort (wordlist, n_array, sizeof (const char *), compare);
-    for (i = 0; i < n_array; i++) {
-        printf ("%d: %s.\n", i, wordlist[i]);
+        for (int i = 0; i < counter; i++) {
+            if (strcmp(wordlist[i], entry) == 0) {
+                contains = true;
+            }
+        }
+
+        if (!contains) {
+            wordlist[counter] = entry;
+            counter++;
+        }
+    };
+
+    char temp[20];
+
+    for (int i = 0; i < counter - 1; i++) {
+        for (int j = i + 1; j < counter; j++) {
+            if (strcmp(wordlist[i], wordlist[j]) > 0) {
+                strcpy(temp, wordlist[i]);
+                strcpy(wordlist[i], wordlist[j]);
+                strcpy(wordlist[j], temp);
+            }
+        }
+    }
+
+    printf("\nSortierte Liste:\n");
+
+    for (int i = 0; i < counter; i++) {
+        printf("%s\n", wordlist[i]);
     }
     
     return EXIT_SUCCESS;
