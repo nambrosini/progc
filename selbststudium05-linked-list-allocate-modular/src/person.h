@@ -25,6 +25,10 @@ void show();
 
 bool clear();
 
-void end();
+void display_person(Person p);
+
+bool isPersonEmpty(Person p);
+
+int comparePerson(Person p1, Person p2);
 
 #endif //_PERSON_H_
