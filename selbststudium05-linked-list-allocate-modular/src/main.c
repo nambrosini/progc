@@ -29,15 +29,15 @@ int main(int argc, char* argv[])
             if (insert(p)) {
                 printf("\nPerson successfully inserted.\n");
             } else {
-                printf("Could not insert person. Person already exists.\n");
+                printf("\nCould not insert person. Person already exists.\n");
             }
         } else if (input[0] == 'R' || input[0] == 'r') {
             printf("Person to remove:\n");
             Person p = getInput();
             if (removePerson(p)) {
-                printf("Person successfully removed.\n");
+                printf("\nPerson successfully removed.\n");
             } else {
-                printf("Could not delete person. Person doesn't exists.\n");
+                printf("\nCould not delete person. Person doesn't exists.\n");
             }
         } else if (input[0] == 'S' || input[0] == 's') {
             show();
@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
             }
         } else if (input[0] == 'E' || input[0] == 'e') {
             printf("Exiting...\n");
-            exit(0);
+            end = true;
         } else {
             printf("Command not found.\n");
         }
@@ -108,26 +108,73 @@ bool insert(Person p) {
 }
 
 bool removePerson(Person p) {
+    if (head == NULL) {
+        return false;
+    }
+
+    ListElement * current = head;
+    ListElement * before = NULL;
+
+    while (current != NULL) {
+        if (comparePerson(p, current->context) < 0) {
+            return false;
+        }
+
+        if (comparePerson(p, current->context) == 0) {
+            if (before == NULL) {
+                head = current->next;
+                free(current);
+                return true;
+            }
+
+            before = current->next;
+            free(current);
+            return true;
+        }
+
+        if (comparePerson(p, current->context) > 0) {
+            before = current;
+            current = current->next;
+        }
+    }
+
     return false;
 }
 
 void show() {
-    printf("List of people:\n");
-
-    if (!head) {
+    if (head == NULL) {
+        printf("List is empty.\n");
         return;
     }
 
+    printf("List of people:\n");
+
     ListElement * current = head;
 
-    while (current) {
+    while (current != NULL) {
         display_person(current->context);
-
         current = current->next;
     }
 }
 
 bool clear() {
+    if (head == NULL) {
+        return true;
+    }
+
+    ListElement * current = head;
+    head = NULL;
+
+    while (current != NULL) {
+        ListElement * toRemove = current;
+        current = current->next;
+        free(toRemove);
+    }
+    
+    if (head == NULL) {
+        return true;
+    }
+
     return false;
 }
 
