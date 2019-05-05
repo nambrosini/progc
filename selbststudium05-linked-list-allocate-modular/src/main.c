@@ -6,7 +6,7 @@
 
 #include <person.h>
 
-ListElement root;
+ListElement * head;
 
 void showMenu() {
     printf("\nWelcome to your personal stalking list:\n");
@@ -68,35 +68,42 @@ Person getInput() {
 }
 
 bool insert(Person p) {
-    if (isPersonEmpty(root.context)) {
-        root.context = p;
-
+    if (!head) {
+        head = malloc(sizeof(ListElement));
+        head->context = p;
+        head->next = NULL;
         return true;
     }
 
-    ListElement le = root;
+    ListElement * current = head;
+    ListElement * before = NULL;
 
-    ListElement newLe;
-    newLe.context = p;
+    ListElement * newElement = malloc(sizeof(ListElement));
+    newElement->context = p;
+    newElement->next = NULL;
 
     while (true) {
-        ListElement next = *le.next; // If next is null everything fucks up!!
+        if (comparePerson(p, current->context) == 0) {
+            return false;
+        }
 
-
-        // if (comparePerson(next.context, newLe.context) > 0) {
-        //     if (!next.next) {
-        //         next.next = &newLe;
-        //         return true;
-        //     }
-        //     le = next;
-        // }
-        // } else if (comparePerson(next.context, p) < 0) {
-        //     newLe.next = &next;
-        //     le.next = &newLe;
-        //     return true;
-        // } else {
-        //     return false;
-        // }
+        if (comparePerson(p, current->context) > 0) {
+            if (current->next == NULL) {
+                current->next = newElement;
+                return true;
+            }
+            before = current;
+            current = current->next;
+        } else if (comparePerson(p, current->context) < 0) {
+            if (before == NULL) {
+                newElement->next = current;
+                head = newElement;
+                return true;
+            }
+            before->next = newElement;
+            newElement->next = current;
+            return true;
+        }
     }
 }
 
@@ -106,17 +113,17 @@ bool removePerson(Person p) {
 
 void show() {
     printf("List of people:\n");
-    ListElement le = root;
 
-    bool stop = false;
+    if (!head) {
+        return;
+    }
 
-    while(!stop) {
-        display_person(le.context);
-        if (le.next) {
-            le = *le.next;
-        } else {
-            stop = true;
-        }
+    ListElement * current = head;
+
+    while (current) {
+        display_person(current->context);
+
+        current = current->next;
     }
 }
 
@@ -128,12 +135,6 @@ void display_person(Person p) {
     printf("%s %s, %d\n", p.firstName, p.name, p.age);
 }
 
-bool isPersonEmpty(Person p) {
-    return p.name[0] == '\0' || 
-        p.firstName[0] == '\0' ||
-        p.age == 0;
-}
-
 int comparePerson(Person p1, Person p2) {
     int comparison = strcmp(p1.name, p2.name);
     if (comparison != 0) {
@@ -142,8 +143,8 @@ int comparePerson(Person p1, Person p2) {
         comparison = strcmp(p1.firstName, p2.firstName);
         if (comparison != 0) {
             return comparison;
-        } else {
-            return p2.age - p1.age;
         }
+        
+        return p1.age - p2.age;
     }
 }
