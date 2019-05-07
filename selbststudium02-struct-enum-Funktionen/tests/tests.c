@@ -70,11 +70,44 @@ static void test_next_date(void)
     }
 }
 
+static void test_weird_dates(void)
+{
+    Date dates[] = { {-1, 1, 1583},
+                     {-1, -1, -1},
+
+                     {0, 0, 0},
+                     {-1, -1, -1},
+
+                     {29, 2, 1900},
+                     {-1, -1, -1},
+
+                     {29, 13, 4000},
+                     {-1, -1, -1},
+
+                     {32, 12, 2016},
+                     {-1, -1, -1}
+    };
+    int num_dates = sizeof(dates) / sizeof(*dates);
+
+    printf("\n");
+    for (int i=0; i<num_dates; i+=2) {
+        Date next_date = calculate_next_date(dates[i]);
+        printf("%2d %2d %4d -> %2d %2d %4d\n",
+               dates[i].day, dates[i].month, dates[i].year,
+               next_date.day, next_date.month, next_date.year);
+
+        CU_ASSERT_EQUAL(dates[i+1].day, next_date.day);
+        CU_ASSERT_EQUAL(dates[i+1].month, next_date.month);
+        CU_ASSERT_EQUAL(dates[i+1].year, next_date.year);
+    }
+}
+
 int main(void)
 {
     // setup, run, teardown
     TestMainBasic("Calculate next date", setup, teardown
                   , test_intput_on_cmd_line
                   , test_next_date
+                  , test_weird_dates
                   );
 }
