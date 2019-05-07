@@ -6,6 +6,9 @@
 #include "statistics.h"
 
 unsigned int getMark(unsigned int p, unsigned int p6) {
+    if (p < 0) {
+        return -1;
+    }
     float note = 1.0 + (5.0 * p) / (float) p6;
 
     if ((int) (note * 10) % 10 >= 5) {
@@ -18,6 +21,16 @@ unsigned int getMark(unsigned int p, unsigned int p6) {
 statistics_t getStatistics(unsigned int student_points[],
                             size_t num_students,
                             unsigned int p6) {
+
+    unsigned int refactored_student_points[num_students];
+    int counter = 0;
+
+    for (int i = 0; i < num_students; i++) {
+        if (student_points[i] >= 0 && student_points[i] <= p6) {
+            refactored_student_points[counter] = student_points[i];
+            counter++;
+        }
+    }
     statistics_t statistics;
     
     statistics.averageMark = 0.0;
@@ -31,8 +44,8 @@ statistics_t getStatistics(unsigned int student_points[],
     statistics.mark6 = 0;
     statistics.greaterThan4 = 0;
 
-    for (int i = 0; i < num_students; i++) {
-        int note = getMark(student_points[i], p6);
+    for (int i = 0; i < counter; i++) {
+        int note = getMark(refactored_student_points[i], p6);
 
         switch (note)
         {
@@ -73,8 +86,8 @@ statistics_t getStatistics(unsigned int student_points[],
         }
     }
 
-    statistics.averageMark /= (double) num_students;
-    statistics.greaterThan4Percent = statistics.greaterThan4 / (double) num_students * 100;
+    statistics.averageMark /= (double) counter;
+    statistics.greaterThan4Percent = statistics.greaterThan4 / (double) counter * 100;
     
     return statistics;
 }

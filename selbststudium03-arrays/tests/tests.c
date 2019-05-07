@@ -53,8 +53,6 @@ static void test_getStatistics(void)
     };
     unsigned int num_students = sizeof(student_points)/sizeof(*student_points);
 
-
-
     statistics_t statistics = getStatistics(student_points, num_students, 100);
 
     CU_ASSERT_EQUAL(statistics.mark1, 1);
@@ -70,11 +68,39 @@ static void test_getStatistics(void)
     CU_ASSERT_EQUAL(statistics.greaterThan4Percent, (6 + 5 + 4) / (double) num_students * 100);
 }
 
+static void test_weird_statistics(void)
+{
+    unsigned int student_points[] = {
+        -15,
+        20, 20,
+        40, 40, 40,
+        60, 60, 60, 60,
+        80, 80, 80, 80, 80,
+        100, 100, 100, 100, 100, 100
+    };
+    unsigned int num_students = sizeof(student_points)/sizeof(*student_points);
+
+    statistics_t statistics = getStatistics(student_points, num_students, 100);
+
+    CU_ASSERT_EQUAL(statistics.mark1, 0);
+    CU_ASSERT_EQUAL(statistics.mark2, 2);
+    CU_ASSERT_EQUAL(statistics.mark3, 3);
+    CU_ASSERT_EQUAL(statistics.mark4, 4);
+    CU_ASSERT_EQUAL(statistics.mark5, 5);
+    CU_ASSERT_EQUAL(statistics.mark6, 6);
+    CU_ASSERT_EQUAL(statistics.bestMark, 6);
+    CU_ASSERT_EQUAL(statistics.worstMark, 2);
+    CU_ASSERT_EQUAL(statistics.averageMark, 90.0 / (double) (num_students - 1));
+    CU_ASSERT_EQUAL(statistics.greaterThan4, 6 + 5 + 4);
+    CU_ASSERT_EQUAL(statistics.greaterThan4Percent, (6 + 5 + 4) / (double) (num_students - 1) * 100);
+}
+
 int main(void)
 {
     // setup, run, teardown
     TestMainBasic("Notenstatistik", setup, teardown
                   , test_getMark
                   , test_getStatistics
+                  , test_weird_statistics
                   );
 }
