@@ -61,5 +61,4 @@ tests/
 ^*.c
 
 CUnit/
-
-CUnit/
+include/
