@@ -42,11 +42,20 @@ static int teardown(void)
 
 
 // tests
-static void test_main(void)
+static void test_empty(void)
 {
     const char *out_txt[] = {"words: 11, characters: 61\n"};
 
     int exit_code = system(XSTR(TARGET) " 1>" OUTFILE " 2>" ERRFILE " < stim.input");
+    CU_ASSERT_EQUAL(exit_code, 0);
+    assert_lines(OUTFILE, out_txt, sizeof(out_txt)/sizeof(*out_txt));
+}
+
+static void test_main(void)
+{
+    const char *out_txt[] = {"words: 0, characters: 0\n"};
+
+    int exit_code = system(XSTR(TARGET) " 1>" OUTFILE " 2>" ERRFILE " < empty.input");
     CU_ASSERT_EQUAL(exit_code, 0);
     assert_lines(OUTFILE, out_txt, sizeof(out_txt)/sizeof(*out_txt));
 }
@@ -58,6 +67,5 @@ int main(void)
 {
     // setup, run, teardown
     TestMainBasic("Zaehlen von Zeichen und Woertern", setup, teardown
-                  , test_main
-                  );
+                  , test_main, test_empty);
 }

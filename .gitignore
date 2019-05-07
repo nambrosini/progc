@@ -56,3 +56,6 @@ tests/
 
 .vscode
 */**/.vscode
+
+^*.input
+^*.c
