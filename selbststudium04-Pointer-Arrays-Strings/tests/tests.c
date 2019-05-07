@@ -8,6 +8,7 @@
 #define INFILE_IN_ORDER "stim-in-order.input"
 #define INFILE_OUT_OF_ORDER "stim-out-of-order.input"
 #define INFILE_DOUBLE_ENTRIES "stim-double-entries.input"
+#define INFILE_EMPTY "stim-empty-list.input"
 
 /// @brief The name of the STDOUT text file.
 #define OUTFILE "stdout.txt"
@@ -132,6 +133,18 @@ static void test_double_entries(void)
     assert_lines(OUTFILE, out_txt, sizeof(out_txt)/sizeof(*out_txt));
 }
 
+static void test_empty() {
+    const char * out_txt[] = {
+        "\n",
+        "The list is empty.\n"
+    };
+
+    int exit_code = system(XSTR(TARGET) " 1>" OUTFILE " 2>" ERRFILE " <" INFILE_EMPTY);
+    // assert
+    CU_ASSERT_EQUAL(exit_code, 0);
+    assert_lines(OUTFILE, out_txt, sizeof(out_txt)/sizeof(*out_txt));
+}
+
 int main(void)
 {
     // setup, run, teardown
@@ -139,5 +152,6 @@ int main(void)
                   , test_in_order
                   , test_out_of_order
                   , test_double_entries
+                  , test_empty
                   );
 }

@@ -36,6 +36,11 @@ int main(int argc, char* argv[])
         }
     };
 
+    if (wordlist[0] == NULL) {
+        printf("\nThe list is empty.\n");
+        return EXIT_SUCCESS;
+    }
+
     char temp[20];
 
     for (int i = 0; i < counter - 1; i++) {
