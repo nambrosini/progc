@@ -57,7 +57,7 @@ Date calculate_next_date(Date date)
     }
 
     if (date.month == 2) {
-        if (date.day == 28 && isLeap(date.year) || date.day < 28) {
+        if ((date.day == 28 && isLeap(date.year)) || date.day < 28) {
             date.day++;
         } else {
             date.day = 1;
