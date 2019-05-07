@@ -42,7 +42,7 @@ static int teardown(void)
 
 
 // tests
-static void test_empty(void)
+static void test_main(void)
 {
     const char *out_txt[] = {"words: 11, characters: 61\n"};
 
@@ -51,7 +51,7 @@ static void test_empty(void)
     assert_lines(OUTFILE, out_txt, sizeof(out_txt)/sizeof(*out_txt));
 }
 
-static void test_main(void)
+static void test_empty(void)
 {
     const char *out_txt[] = {"words: 0, characters: 0\n"};
 
