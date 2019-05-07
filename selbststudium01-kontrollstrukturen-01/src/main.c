@@ -12,6 +12,7 @@
  * @brief Lab implementation
  */
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
  * @brief Main entry point.
